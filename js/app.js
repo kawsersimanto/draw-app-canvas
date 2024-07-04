@@ -1,4 +1,5 @@
 import Circle from "./Circle.js";
+import Line from "./Line.js";
 import Rectangle from "./Rectangle.js";
 
 const controls = document.querySelectorAll(".control-item");
@@ -36,22 +37,22 @@ function handleMouseDown(e) {
   switch (shapeName) {
     case "rectangle":
       currentShape = new Rectangle(startX, startY, 0, 0, "red");
-      shapes.push(currentShape);
-      render(shapes);
       break;
 
     case "circle":
       currentShape = new Circle(startX, startY, 0, "red");
-      shapes.push(currentShape);
-      render(shapes);
+      break;
+    case "line":
+      currentShape = new Line(startX, startY, "red");
       break;
 
     default:
       currentShape = new Rectangle(startX, startY, 0, 0, "red");
-      shapes.push(currentShape);
-      render(shapes);
       break;
   }
+
+  shapes.push(currentShape);
+  render(shapes);
 }
 
 function handleMouseMove(e) {
@@ -60,6 +61,10 @@ function handleMouseMove(e) {
     render(shapes);
   }
   if (currentShape instanceof Circle) {
+    currentShape.update(e.offsetX, e.offsetY);
+    render(shapes);
+  }
+  if (currentShape instanceof Line) {
     currentShape.update(e.offsetX, e.offsetY);
     render(shapes);
   }
