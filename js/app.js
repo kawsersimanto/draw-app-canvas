@@ -25,6 +25,7 @@ controls.forEach((control) => {
 canvas.addEventListener("mousedown", handleMouseDown);
 canvas.addEventListener("mousemove", handleMouseMove);
 canvas.addEventListener("mouseup", handleMouseUp);
+// document.addEventListener("keydown", handleKeyDown);
 
 // Event Handlers
 function handleClick(e) {
@@ -75,6 +76,15 @@ function handleMouseUp(e) {
   render(shapes);
 }
 
+// function handleKeyDown(e) {
+//   if (e.ctrlKey && e.key === "z") {
+//     undo();
+//   } else if (e.ctrlKey && e.key === "y") {
+//     redo();
+//   }
+// }
+
+// Renderer
 function render(shapes) {
   context.clearRect(0, 0, canvas.width, canvas.height);
   shapes.forEach((shape) => {
