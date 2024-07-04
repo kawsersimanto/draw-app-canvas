@@ -31,13 +31,21 @@ canvas.addEventListener("mouseup", handleMouseUp);
 function handleMouseDown(e) {
   let startX = e.offsetX;
   let startY = e.offsetY;
-  currentShape = new Rectangle(startX, startY, 0, 0, "red");
-  shapes.push(currentShape);
-  render(shapes);
+
+  switch (shapeName) {
+    case "rectangle":
+      currentShape = new Rectangle(startX, startY, 0, 0, "red");
+      shapes.push(currentShape);
+      render(shapes);
+      break;
+
+    default:
+      break;
+  }
 }
 
 function handleMouseMove(e) {
-  if (currentShape) {
+  if (currentShape instanceof Rectangle) {
     currentShape.update(e.offsetX, e.offsetY);
     render(shapes);
   }
