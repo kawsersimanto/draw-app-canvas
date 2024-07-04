@@ -3,32 +3,40 @@ import Line from "./Line.js";
 import Rectangle from "./Rectangle.js";
 
 const controls = document.querySelectorAll(".control-item");
+
+// canvas settings
 const canvas = document.querySelector("canvas");
 /** @type {CanvasRenderingContext2D} */
 const context = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// track shapes
 const shapes = [];
 let currentShape = null;
-
 let shapeName;
 
+// track controls
 controls.forEach((control) => {
-  control.addEventListener("click", () => {
-    controls.forEach((item) => {
-      item.classList.remove("active");
-      canvas.classList.remove(`cursor-${item.getAttribute("data-shape")}`);
-    });
-    control.classList.add("active");
-    shapeName = control.getAttribute("data-shape");
-    canvas.classList.add(`cursor-${shapeName}`);
-  });
+  control.addEventListener("click", handleClick);
 });
 
+// Event listeners
 canvas.addEventListener("mousedown", handleMouseDown);
 canvas.addEventListener("mousemove", handleMouseMove);
 canvas.addEventListener("mouseup", handleMouseUp);
+
+// Event Handlers
+function handleClick(e) {
+  controls.forEach((item) => {
+    item.classList.remove("active");
+    canvas.classList.remove(`cursor-${item.getAttribute("data-shape")}`);
+  });
+  const control = e.currentTarget;
+  control.classList.add("active");
+  shapeName = control.getAttribute("data-shape");
+  canvas.classList.add(`cursor-${shapeName}`);
+}
 
 function handleMouseDown(e) {
   let startX = e.offsetX;
@@ -56,15 +64,7 @@ function handleMouseDown(e) {
 }
 
 function handleMouseMove(e) {
-  if (currentShape instanceof Rectangle) {
-    currentShape.update(e.offsetX, e.offsetY);
-    render(shapes);
-  }
-  if (currentShape instanceof Circle) {
-    currentShape.update(e.offsetX, e.offsetY);
-    render(shapes);
-  }
-  if (currentShape instanceof Line) {
+  if (currentShape) {
     currentShape.update(e.offsetX, e.offsetY);
     render(shapes);
   }
