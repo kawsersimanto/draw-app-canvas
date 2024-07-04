@@ -9,8 +9,9 @@ export default class Rectangle extends Shape {
     this.height = height;
   }
   draw(context) {
-    context.fillStyle = this.color;
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.strokeStyle = this.color;
+    context.strokeRect(this.x, this.y, this.width, this.height);
+    context.stroke();
   }
 
   update(x, y) {

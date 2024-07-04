@@ -47,3 +47,15 @@ img {
   width: 30px;
   height: 30px;
 }
+
+.cursor-circle {
+  cursor: url("images/circle-arrow.svg"), auto;
+}
+
+/* .cursor-rectangle {
+  cursor: url("images/rectangle.svg"), auto;
+} */
+
+.cursor-line {
+  cursor: url("images/pen.svg"), auto;
+}
